@@ -14,7 +14,7 @@ export default function SkillsPage() {
     <Section
       eyebrow="Skills"
       title="Technologies I use and am learning"
-      description="Grouped by category. This list only includes technologies I've actually worked with — nothing aspirational."
+      
     >
       <SkillsGrid skills={skills} />
     </Section>

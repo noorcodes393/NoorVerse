@@ -13,7 +13,7 @@ export default function AboutPage() {
     <Section
       eyebrow="About"
       title="Who I am"
-      description="A bit about my background, what I'm studying, and where my interests in frontend and AI engineering are taking me."
+      
     >
       <AboutSection />
     </Section>

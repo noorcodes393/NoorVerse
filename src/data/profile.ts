@@ -1,8 +1,6 @@
 import { Profile } from "@/types";
 
-// Single source of truth for Noor's personal/professional identity.
-// Update this file to change how Noor is described across the whole site
-// (and, later, how the AI Assistant describes her).
+
 export const profile: Profile = {
   name: "Noor Fatima",
   role: "Frontend Developer / AI Engineering Learner",

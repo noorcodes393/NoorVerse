@@ -13,7 +13,7 @@ export default function CertificatesPage() {
     <Section
       eyebrow="Certificates"
       title="Courses & certifications"
-      description="Only certificates I've actually completed appear here, with no invented dates or credential IDs."
+      description="A curated collection of certifications that represent my continuous learning and growth across software development and AI"
     >
       <CertificatesList certificates={certificates} />
     </Section>

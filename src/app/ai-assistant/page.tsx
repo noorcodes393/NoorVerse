@@ -13,7 +13,7 @@ export default function AIAssistantPage() {
     <Section
       eyebrow="AI Assistant"
       title="Ask about Noor"
-      description="A real, Claude-powered assistant grounded in NoorVerse's structured data."
+     
     >
       <AssistantSection />
     </Section>

@@ -2,7 +2,7 @@ import {
   getGeminiClient,
   GEMINI_MODEL,
   MAX_OUTPUT_TOKENS,
-} from "@/lib/anthropic";
+} from "@/lib/GEMINI";
 import { buildSystemPrompt } from "@/lib/system-prompt";
 import type { ChatApiMessage, ChatStreamEvent } from "@/types/chat";
 

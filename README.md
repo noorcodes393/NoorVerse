@@ -240,16 +240,11 @@ Run production build locally
 npm run start
 
 ---
+## Live Demo
 
-🔗 Project Links
+🌐 **Live Website:** https://noor-verse-six.vercel.app
 
-Live Website: "ADD_YOUR_VERCEL_URL"
-
-GitHub Repository: "ADD_YOUR_GITHUB_URL"
-
-These links will be updated with the final production and repository URLs.
-
----
+💻 **GitHub Repository:** https://github.com/noorcodes393/NoorVerse
 
 📋 Deployment Checklist
 

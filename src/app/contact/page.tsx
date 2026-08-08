@@ -12,7 +12,7 @@ export default function ContactPage() {
     <Section
       eyebrow="Contact"
       title="Get in touch"
-      description="Real contact details haven't been added yet — update src/data/contact.ts once they're ready."
+      description="Have a Question, Collaboration idea, or opportunity?I'd love to hear from you."
     >
       <ContactSection />
     </Section>

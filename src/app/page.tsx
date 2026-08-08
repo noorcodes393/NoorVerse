@@ -25,7 +25,7 @@ export default function Home() {
       <Section
         eyebrow="Skills"
         title="What I work with"
-        description="A structured look at the languages, frameworks, and tools I use — including what I'm learning in AI engineering."
+    
         className="border-t border-ink-700"
       >
         <SkillsGrid skills={skills} />
@@ -39,7 +39,7 @@ export default function Home() {
       <Section
         eyebrow="Projects"
         title="Selected work"
-        description="Reusable project cards backed by structured data — placeholders stay clearly marked until real details are added."
+        
         className="border-t border-ink-700"
       >
         <ProjectsGrid projects={projects} />
@@ -53,7 +53,7 @@ export default function Home() {
       <Section
         eyebrow="AI Assistant"
         title="Ask NoorVerse about Noor"
-        //escription="A real Claude-powered assistant that answers questions using only this site's structured data — and says so clearly when it doesn't know something."
+        
         className="border-t border-ink-700"
       >
         <Button href="/ai-assistant">Talk to the AI Assistant</Button>

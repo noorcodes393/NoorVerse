@@ -1,7 +1,6 @@
 import { Skill } from "@/types";
 
-// Only skills Noor has actually mentioned. Add new entries here as she
-// picks up new tools — nothing should be added speculatively.
+
 export const skills: Skill[] = [
   { name: "HTML", category: "Languages & Markup" },
   { name: "CSS", category: "Languages & Markup" },

@@ -9,7 +9,7 @@ export default function Footer() {
         <p className="font-mono">
           © {year} {profile.name}. Built with Next.js &amp; Tailwind CSS.
         </p>
-        <p>NoorVerse — a developer platform, still under active construction.</p>
+        <p>NoorVerse </p>
       </div>
     </footer>
   );

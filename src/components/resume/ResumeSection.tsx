@@ -18,14 +18,7 @@ export default function ResumeSection() {
           <p className="font-mono text-xs uppercase tracking-widest text-amber-400">
             Resume file status
           </p>
-          <p className="mt-1 text-sm text-paper-400">
-            The CV PDF hasn&apos;t been added yet. Once ready, place the file
-            at{" "}
-            <code className="rounded bg-ink-900 px-1.5 py-0.5 font-mono text-xs text-paper-200">
-              public{RESUME_PDF_PATH}
-            </code>{" "}
-            and these buttons will work automatically.
-          </p>
+        A quick overview of my skills ,eductaion, experience ,education ,and projects.
         </div>
         <div className="flex shrink-0 gap-3">
           <Button href={RESUME_PDF_PATH} variant="secondary" external>

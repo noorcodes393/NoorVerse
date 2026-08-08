@@ -12,7 +12,7 @@ export default function ResumePage() {
     <Section
       eyebrow="Resume / CV"
       title="Resume"
-      description="A summary view built from the same structured data as the rest of NoorVerse, plus a downloadable PDF once it's added."
+      
     >
       <ResumeSection />
     </Section>

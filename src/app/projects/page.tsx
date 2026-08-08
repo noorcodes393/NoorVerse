@@ -13,7 +13,7 @@ export default function ProjectsPage() {
     <Section
       eyebrow="Projects"
       title="Things I've built"
-      description="Backed by structured project data. Reserved slots stay marked as placeholders rather than filled with invented details."
+      
     >
       <ProjectsGrid projects={projects} />
     </Section>

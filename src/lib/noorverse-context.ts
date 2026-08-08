@@ -4,16 +4,7 @@ import { projects } from "@/data/projects";
 import { certificates } from "@/data/certificates";
 import { contactLinks } from "@/data/contact";
 
-/**
- * Builds a single plain-text block describing NoorVerse's real, structured
- * data. This is the ONLY source of truth the assistant is given about
- * Noor — it must not answer from general knowledge about anything
- * personal.
- *
- * IMPORTANT: only import this from server-side code (API routes, server
- * components). It's plain data (no secrets), but it has no reason to be
- * in the client bundle.
- */
+
 export function buildNoorverseContext(): string {
   const skillLines = skills
     .map((s) => `- ${s.name} (${s.category})${s.note ? `: ${s.note}` : ""}`)
