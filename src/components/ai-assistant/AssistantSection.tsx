@@ -12,7 +12,7 @@ const EXAMPLE_QUESTIONS = [
 
 export default function AssistantSection() {
   return (
-    <div className="grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
+<div className="grid grid-cols-1 gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
       <div>
         <p className="text-base leading-relaxed text-paper-200">
           This assistant is powered by the real GEMINI API,

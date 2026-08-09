@@ -9,55 +9,74 @@ import { skills } from "@/data/skills";
 
 export default function Home() {
   return (
-    <>
-      <Hero />
+    <div className="relative">
+      {/* Lightweight page content layer */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[700px] bg-gradient-to-b from-cyan-500/5 via-transparent to-transparent"
+      />
 
-      <Section
-        eyebrow="About"
-        title="A quick introduction"
-        description={profile.aboutParagraphs[0]}
-      >
-        <Button href="/about" variant="secondary">
-          Read the full story
-        </Button>
-      </Section>
+      <div className="reveal">
+        <Hero />
+      </div>
 
-      <Section
-        eyebrow="Skills"
-        title="What I work with"
-    
-        className="border-t border-ink-700"
-      >
-        <SkillsGrid skills={skills} />
-        <div className="mt-8">
-          <Button href="/skills" variant="secondary">
-            See the full skills breakdown
+      <div className="reveal reveal-delay-1">
+        <Section
+          eyebrow="About"
+          title="A quick introduction"
+          description={profile.aboutParagraphs[0]}
+        >
+          <Button href="/about" variant="secondary">
+            Read the full story
           </Button>
-        </div>
-      </Section>
+        </Section>
+      </div>
 
-      <Section
-        eyebrow="Projects"
-        title="Selected work"
-        
-        className="border-t border-ink-700"
-      >
-        <ProjectsGrid projects={projects} />
-        <div className="mt-8">
-          <Button href="/projects" variant="secondary">
-            View all projects
+      <div className="reveal reveal-delay-2">
+        <Section
+          eyebrow="Skills"
+          title="What I work with"
+          className="border-t border-ink-700"
+        >
+          <SkillsGrid skills={skills} />
+
+          <div className="mt-8">
+            <Button href="/skills" variant="secondary">
+              See the full skills breakdown
+            </Button>
+          </div>
+        </Section>
+      </div>
+
+      <div className="reveal reveal-delay-3">
+        <Section
+          eyebrow="Projects"
+          title="Selected work"
+          description="A selection of projects I've built while learning, experimenting, and developing my skills."
+          className="border-t border-ink-700"
+        >
+          <ProjectsGrid projects={projects} />
+
+          <div className="mt-8">
+            <Button href="/projects" variant="secondary">
+              View all projects
+            </Button>
+          </div>
+        </Section>
+      </div>
+
+      <div className="reveal reveal-delay-4">
+        <Section
+          eyebrow="AI Assistant"
+          title="Ask NoorVerse about Noor"
+          description="Explore my background, skills, projects, and experience through the NoorVerse AI Assistant."
+          className="border-t border-ink-700"
+        >
+          <Button href="/ai-assistant">
+            Talk to the AI Assistant
           </Button>
-        </div>
-      </Section>
-
-      <Section
-        eyebrow="AI Assistant"
-        title="Ask NoorVerse about Noor"
-        
-        className="border-t border-ink-700"
-      >
-        <Button href="/ai-assistant">Talk to the AI Assistant</Button>
-      </Section>
-    </>
+        </Section>
+      </div>
+    </div>
   );
 }

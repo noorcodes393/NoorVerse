@@ -18,23 +18,31 @@ export default function Section({
   className = "",
 }: SectionProps) {
   return (
-    <section id={id} className={`mx-auto max-w-6xl px-4 py-16 sm:px-6 ${className}`}>
-      <div className="mb-10 max-w-2xl">
+    <section
+      id={id}
+      className={`page-section mx-auto max-w-6xl px-4 py-16 sm:px-6 ${className}`}
+    >
+      <div className="section-heading mb-10 max-w-2xl">
         {eyebrow && (
-          <p className="mb-2 font-mono text-xs uppercase tracking-widest text-cyan-400">
+          <p className="section-eyebrow mb-2 font-mono text-xs uppercase tracking-widest text-cyan-400">
             {eyebrow}
           </p>
         )}
-        <h2 className="font-display text-3xl font-semibold tracking-tight text-paper-100 sm:text-4xl">
+
+        <h2 className="section-title font-display text-3xl font-semibold tracking-tight text-paper-100 sm:text-4xl">
           {title}
         </h2>
+
         {description && (
-          <p className="mt-3 text-base leading-relaxed text-paper-400">
+          <p className="section-description mt-3 text-base leading-relaxed text-paper-400">
             {description}
           </p>
         )}
       </div>
-      {children}
+
+      <div className="section-content">
+        {children}
+      </div>
     </section>
   );
 }

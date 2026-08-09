@@ -1,6 +1,12 @@
 "use client";
 
-import { FormEvent, KeyboardEvent, useEffect, useRef, useState } from "react";
+import {
+  FormEvent,
+  KeyboardEvent,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { useChat } from "@/hooks/useChat";
 
 const SUGGESTIONS = [
@@ -13,30 +19,43 @@ const SUGGESTIONS = [
 export default function AssistantChat() {
   const { messages, isStreaming, sendMessage, stop, retryLast, clear } =
     useChat();
+
   const [input, setInput] = useState("");
   const [validationError, setValidationError] = useState<string | null>(null);
+
   const listEndRef = useRef<HTMLDivElement | null>(null);
-  const textareaRef = useRef<HTMLTextAreaElement | null>(null);
 
   useEffect(() => {
-    listEndRef.current?.scrollIntoView({ behavior: "smooth", block: "end" });
-  }, [messages]);
+    const frame = requestAnimationFrame(() => {
+      listEndRef.current?.scrollIntoView({
+        behavior: "auto",
+        block: "end",
+      });
+    });
+
+    return () => cancelAnimationFrame(frame);
+  }, [messages.length, isStreaming]);
 
   const lastMessage = messages[messages.length - 1];
-  const canRetry = lastMessage?.role === "assistant" && lastMessage.status === "error";
+
+  const canRetry =
+    lastMessage?.role === "assistant" &&
+    lastMessage.status === "error";
 
   function submit(text: string) {
     const trimmed = text.trim();
+
     if (!trimmed) {
       setValidationError("Type a question before sending.");
       return;
     }
+
     setValidationError(null);
     sendMessage(trimmed);
     setInput("");
   }
 
-  function handleSubmit(e: FormEvent) {
+  function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     submit(input);
   }
@@ -52,13 +71,24 @@ export default function AssistantChat() {
     <div className="flex h-[560px] flex-col overflow-hidden rounded-xl border border-ink-700 bg-ink-800">
       <div className="flex items-center justify-between border-b border-ink-700 px-4 py-3">
         <div className="flex items-center gap-1.5">
-          <span aria-hidden="true" className="h-3 w-3 rounded-full bg-[#ff5f57]" />
-          <span aria-hidden="true" className="h-3 w-3 rounded-full bg-[#febc2e]" />
-          <span aria-hidden="true" className="h-3 w-3 rounded-full bg-[#28c840]" />
+          <span
+            aria-hidden="true"
+            className="h-3 w-3 rounded-full bg-[#ff5f57]"
+          />
+          <span
+            aria-hidden="true"
+            className="h-3 w-3 rounded-full bg-[#febc2e]"
+          />
+          <span
+            aria-hidden="true"
+            className="h-3 w-3 rounded-full bg-[#28c840]"
+          />
+
           <span className="ml-2 font-mono text-xs text-paper-400">
             noorverse — ai-assistant
           </span>
         </div>
+
         <button
           type="button"
           onClick={clear}
@@ -69,7 +99,6 @@ export default function AssistantChat() {
         </button>
       </div>
 
-      {/* Message log */}
       <div
         role="log"
         aria-live="polite"
@@ -82,15 +111,16 @@ export default function AssistantChat() {
               Ask about Noor&apos;s education, skills, projects, certificates,
               or how to get in touch.
             </p>
+
             <div className="flex flex-wrap justify-center gap-2">
-              {SUGGESTIONS.map((q) => (
+              {SUGGESTIONS.map((question) => (
                 <button
-                  key={q}
+                  key={question}
                   type="button"
-                  onClick={() => submit(q)}
+                  onClick={() => submit(question)}
                   className="focus-ring rounded-full border border-ink-600 bg-ink-900 px-3 py-1.5 font-mono text-xs text-paper-200 transition-colors hover:border-amber-500/40 hover:text-amber-400"
                 >
-                  {q}
+                  {question}
                 </button>
               ))}
             </div>
@@ -100,7 +130,11 @@ export default function AssistantChat() {
         {messages.map((message) => (
           <div
             key={message.id}
-            className={`flex ${message.role === "user" ? "justify-end" : "justify-start"}`}
+            className={`flex ${
+              message.role === "user"
+                ? "justify-end"
+                : "justify-start"
+            }`}
           >
             <div
               className={`max-w-[85%] rounded-xl px-4 py-2.5 text-sm leading-relaxed ${
@@ -112,9 +146,16 @@ export default function AssistantChat() {
               {message.role === "assistant" &&
               message.status === "streaming" &&
               message.content === "" ? (
-                <span role="status" className="flex items-center gap-1.5 text-paper-400">
+                <span
+                  role="status"
+                  className="flex items-center gap-1.5 text-paper-400"
+                >
                   <span className="sr-only">Thinking…</span>
-                  <span aria-hidden="true" className="flex gap-1">
+
+                  <span
+                    aria-hidden="true"
+                    className="flex gap-1"
+                  >
                     <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-paper-400" />
                     <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-paper-400 [animation-delay:150ms]" />
                     <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-paper-400 [animation-delay:300ms]" />
@@ -122,13 +163,17 @@ export default function AssistantChat() {
                 </span>
               ) : (
                 <>
-                  <p className="whitespace-pre-wrap">{message.content}</p>
+                  <p className="whitespace-pre-wrap">
+                    {message.content}
+                  </p>
+
                   {message.status === "streaming" && (
                     <span
                       aria-hidden="true"
                       className="caret ml-0.5 inline-block h-3.5 w-1.5 translate-y-0.5 bg-amber-400 align-middle"
                     />
                   )}
+
                   {message.status === "error" && (
                     <p className="mt-2 text-xs text-red-300">
                       {message.errorText ??
@@ -140,10 +185,10 @@ export default function AssistantChat() {
             </div>
           </div>
         ))}
-        <div ref={listEndRef} />
+
+        <div ref={listEndRef} aria-hidden="true" />
       </div>
 
-      {/* Retry bar */}
       {canRetry && !isStreaming && (
         <div className="border-t border-ink-700 bg-ink-900/60 px-4 py-2">
           <button
@@ -156,27 +201,37 @@ export default function AssistantChat() {
         </div>
       )}
 
-      {/* Composer */}
-      <form onSubmit={handleSubmit} className="border-t border-ink-700 p-3">
+      <form
+        onSubmit={handleSubmit}
+        className="border-t border-ink-700 p-3"
+      >
         <label htmlFor="assistant-input" className="sr-only">
           Ask a question about Noor
         </label>
+
         <div className="flex items-end gap-2">
           <textarea
             id="assistant-input"
-            ref={textareaRef}
             value={input}
             onChange={(e) => {
               setInput(e.target.value);
-              if (validationError) setValidationError(null);
+
+              if (validationError) {
+                setValidationError(null);
+              }
             }}
             onKeyDown={handleKeyDown}
             rows={1}
             placeholder="Ask about Noor's skills, projects, or how to get in touch…"
             aria-invalid={validationError ? "true" : undefined}
-            aria-describedby={validationError ? "assistant-input-error" : undefined}
+            aria-describedby={
+              validationError
+                ? "assistant-input-error"
+                : undefined
+            }
             className="focus-ring max-h-32 min-h-[42px] flex-1 resize-none rounded-lg border border-ink-700 bg-ink-900 px-3 py-2.5 text-sm text-paper-200 placeholder:text-paper-400"
           />
+
           {isStreaming ? (
             <button
               type="button"
@@ -194,6 +249,7 @@ export default function AssistantChat() {
             </button>
           )}
         </div>
+
         <div className="mt-1.5 flex items-center justify-between">
           <p
             id="assistant-input-error"
@@ -202,6 +258,7 @@ export default function AssistantChat() {
           >
             {validationError}
           </p>
+
           <p className="text-xs text-paper-400">
             Enter to send · Shift+Enter for a new line
           </p>

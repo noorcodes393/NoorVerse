@@ -22,11 +22,12 @@ export default function ProjectCard({ project }: { project: Project }) {
   }
 
   return (
-    <article className="flex h-full flex-col rounded-xl border border-ink-700 bg-ink-800 p-6 transition-colors hover:border-ink-600">
+    <article className="flex h-full flex-col rounded-xl border border-ink-700 bg-ink-800 p-6">
       <div className="mb-3 flex items-start justify-between gap-3">
         <h3 className="font-display text-xl font-semibold text-paper-100">
           {project.name}
         </h3>
+
         {project.status && (
           <span
             className={`shrink-0 rounded-full border px-2.5 py-1 font-mono text-[11px] ${STATUS_STYLES[project.status]}`}
@@ -43,10 +44,7 @@ export default function ProjectCard({ project }: { project: Project }) {
       {project.features.length > 0 && (
         <ul className="mt-4 space-y-1.5">
           {project.features.map((feature) => (
-            <li
-              key={feature}
-              className="flex gap-2 text-sm text-paper-200"
-            >
+            <li key={feature} className="flex gap-2 text-sm text-paper-200">
               <span aria-hidden="true" className="text-amber-400">
                 ›
               </span>

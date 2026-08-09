@@ -18,15 +18,8 @@ const NAV_LINKS = [
 export default function Navbar() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
-  const [lastPathname, setLastPathname] = useState(pathname);
 
-  // Close the mobile menu on route change. Deriving this during render
-  // (rather than in a useEffect) avoids an extra render pass — see
-  // https://react.dev/learn/you-might-not-need-an-effect
-  if (pathname !== lastPathname) {
-    setLastPathname(pathname);
-    setOpen(false);
-  }
+  const closeMenu = () => setOpen(false);
 
   return (
     <header className="sticky top-0 z-50 border-b border-ink-700 bg-ink-900/90 backdrop-blur">
@@ -36,6 +29,7 @@ export default function Navbar() {
       >
         <Link
           href="/"
+          onClick={closeMenu}
           className="focus-ring flex items-center gap-2 font-display text-lg font-semibold tracking-tight text-paper-100"
         >
           <span
@@ -47,13 +41,13 @@ export default function Navbar() {
           Noor<span className="text-amber-400">Verse</span>
         </Link>
 
-        {/* Desktop nav */}
         <ul className="hidden items-center gap-1 lg:flex">
           {NAV_LINKS.map((link) => {
             const isActive =
               link.href === "/"
                 ? pathname === "/"
                 : pathname?.startsWith(link.href);
+
             return (
               <li key={link.href}>
                 <Link
@@ -72,7 +66,6 @@ export default function Navbar() {
           })}
         </ul>
 
-        {/* Mobile menu toggle */}
         <button
           type="button"
           className="focus-ring inline-flex items-center justify-center rounded-md border border-ink-700 p-2 text-paper-100 lg:hidden"
@@ -83,6 +76,7 @@ export default function Navbar() {
           <span className="sr-only">
             {open ? "Close navigation menu" : "Open navigation menu"}
           </span>
+
           {open ? (
             <svg
               aria-hidden="true"
@@ -111,7 +105,6 @@ export default function Navbar() {
         </button>
       </nav>
 
-      {/* Mobile nav panel */}
       <div
         id="mobile-nav"
         hidden={!open}
@@ -123,10 +116,12 @@ export default function Navbar() {
               link.href === "/"
                 ? pathname === "/"
                 : pathname?.startsWith(link.href);
+
             return (
               <li key={link.href}>
                 <Link
                   href={link.href}
+                  onClick={closeMenu}
                   aria-current={isActive ? "page" : undefined}
                   className={`focus-ring block rounded-md px-3 py-2.5 text-sm font-medium ${
                     isActive

@@ -1,14 +1,10 @@
-@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap");
 @import "tailwindcss";
 
-/*
-  NoorVerse design tokens.
-  Direction: a late-night "build log" — deep ink navy, warm signal-amber
-  accent (the color of a terminal cursor / highlighted diff), and a cool
-  cyan used sparingly for AI/assistant moments. Typography pairs a
-  geometric display face with a plain body face and a mono utility face
-  used for labels, tags, and anything code-adjacent.
-*/
+/* =========================================================
+   NOORVERSE DESIGN SYSTEM
+   Performance-first • Dark AI product • Amber + Cyan
+   ========================================================= */
+
 :root {
   --ink-950: #070c18;
   --ink-900: #0b1220;
@@ -57,24 +53,378 @@
   --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", monospace;
 }
 
+/* =========================================================
+   BASE
+   ========================================================= */
+
 * {
+  box-sizing: border-box;
   border-color: var(--ink-700);
 }
 
 html {
+  background: var(--background);
   scroll-behavior: smooth;
 }
 
 body {
+  min-height: 100vh;
+  margin: 0;
+  overflow-x: hidden;
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
 }
+
+/* Lightweight background — no fixed animated layers */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.55;
+
+  background-image:
+    linear-gradient(
+      to right,
+      rgba(139, 149, 172, 0.025) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      to bottom,
+      rgba(139, 149, 172, 0.025) 1px,
+      transparent 1px
+    );
+
+  background-size: 52px 52px;
+}
+
+/* =========================================================
+   ACCESSIBILITY
+   ========================================================= */
+
+.focus-ring {
+  outline: none;
+}
+
+.focus-ring:focus-visible,
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid var(--amber-400);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 100;
+  padding: 0.75rem 1rem;
+  background: var(--amber-400);
+  color: var(--ink-950);
+  font-family: var(--font-mono);
+  font-weight: 600;
+  border-radius: 0 0 0.5rem 0;
+}
+
+.skip-link:focus {
+  left: 0;
+}
+
+/* =========================================================
+   AI PRODUCT BACKGROUND
+   ========================================================= */
+
+.ai-grid {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: var(--ink-900);
+}
+
+/* Static technical grid */
+.ai-grid::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+
+  background-image:
+    linear-gradient(
+      to right,
+      rgba(79, 209, 197, 0.035) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      to bottom,
+      rgba(79, 209, 197, 0.035) 1px,
+      transparent 1px
+    );
+
+  background-size: 36px 36px;
+  opacity: 0.75;
+}
+
+/* Very small static AI accent */
+.ai-grid::after {
+  content: "";
+  position: absolute;
+  width: 280px;
+  height: 280px;
+  right: -140px;
+  top: -120px;
+  z-index: -1;
+  pointer-events: none;
+
+  background: radial-gradient(
+    circle,
+    rgba(79, 209, 197, 0.035),
+    transparent 70%
+  );
+}
+
+/* Hero grid */
+.grid-backdrop {
+  background-image:
+    linear-gradient(
+      to right,
+      rgba(139, 149, 172, 0.04) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      to bottom,
+      rgba(139, 149, 172, 0.04) 1px,
+      transparent 1px
+    );
+
+  background-size: 42px 42px;
+}
+
+/* =========================================================
+   TYPOGRAPHY
+   ========================================================= */
+
+.text-glow {
+  text-shadow: 0 0 18px rgba(232, 179, 76, 0.18);
+}
+
+.text-cyan-glow {
+  text-shadow: 0 0 16px rgba(79, 209, 197, 0.14);
+}
+
+/* =========================================================
+   PERFORMANCE-FIRST ANIMATIONS
+   ========================================================= */
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 8px, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.animate-fade-up {
+  animation: fade-up 350ms ease-out both;
+}
+
+@keyframes page-enter {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 6px, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.page-enter {
+  animation: page-enter 300ms ease-out both;
+}
+
+.reveal {
+  animation: fade-up 350ms ease-out both;
+}
+
+.reveal-delay-1 {
+  animation-delay: 40ms;
+}
+
+.reveal-delay-2 {
+  animation-delay: 80ms;
+}
+
+.reveal-delay-3 {
+  animation-delay: 120ms;
+}
+
+.reveal-delay-4 {
+  animation-delay: 160ms;
+}
+
+/* =========================================================
+   INTERACTIONS
+   ========================================================= */
+
+.hover-lift {
+  transition:
+    transform 160ms ease,
+    border-color 160ms ease,
+    background-color 160ms ease;
+}
+
+.hover-lift:hover {
+  transform: translate3d(0, -2px, 0);
+}
+
+.press-effect {
+  transition: transform 100ms ease;
+}
+
+.press-effect:active {
+  transform: scale(0.98);
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* =========================================================
+   AI / TERMINAL
+   ========================================================= */
+
+@keyframes caret-blink {
+  0%,
+  49% {
+    opacity: 1;
+  }
+
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+
+.caret {
+  animation: caret-blink 1s step-end infinite;
+}
+
+@keyframes pulse-soft {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+.pulse-soft {
+  animation: pulse-soft 2s ease-in-out infinite;
+}
+
+/* =========================================================
+   CONTENT REVEAL
+   ========================================================= */
+
+@keyframes content-reveal {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 10px, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.page-section {
+  animation: content-reveal 350ms ease-out both;
+}
+
+.section-eyebrow {
+  animation: content-reveal 300ms ease-out both;
+}
+
+.section-title {
+  animation: content-reveal 350ms ease-out 30ms both;
+}
+
+.section-description {
+  animation: content-reveal 350ms ease-out 60ms both;
+}
+
+.section-content {
+  animation: content-reveal 350ms ease-out 90ms both;
+}
+
+.animated-card {
+  opacity: 0;
+  animation: content-reveal 350ms ease-out var(--card-delay, 0ms) both;
+
+  transition:
+    transform 160ms ease,
+    border-color 160ms ease;
+}
+
+.animated-card:hover {
+  transform: translate3d(0, -2px, 0);
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 640px) {
+  body::before {
+    background-size: 44px 44px;
+    opacity: 0.4;
+  }
+
+  .ai-grid::before {
+    background-size: 32px 32px;
+    opacity: 0.55;
+  }
+
+  .ai-grid::after {
+    width: 220px;
+    height: 220px;
+    right: -110px;
+    top: -90px;
+  }
+
+  .grid-backdrop {
+    background-size: 34px 34px;
+  }
+
+  .text-glow {
+    text-shadow: none;
+  }
+}
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
 
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
   }
+
   *,
   *::before,
   *::after {
@@ -83,71 +433,9 @@ body {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
-}
 
-/* Visible focus state used consistently on interactive elements. */
-.focus-ring {
-  outline: none;
-}
-.focus-ring:focus-visible {
-  outline: 2px solid var(--amber-400);
-  outline-offset: 3px;
-  border-radius: 4px;
-}
-
-/* Skip link, visually hidden until focused. */
-.skip-link {
-  position: absolute;
-  left: -9999px;
-  top: 0;
-  z-index: 100;
-  background: var(--amber-400);
-  color: var(--ink-950);
-  padding: 0.75rem 1rem;
-  font-family: var(--font-mono);
-  font-weight: 600;
-  border-radius: 0 0 0.5rem 0;
-}
-.skip-link:focus {
-  left: 0;
-}
-
-/* Subtle grid backdrop used behind the hero / section dividers. */
-.grid-backdrop {
-  background-image:
-    linear-gradient(to right, rgba(139, 149, 172, 0.08) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(139, 149, 172, 0.08) 1px, transparent 1px);
-  background-size: 40px 40px;
-}
-
-.text-glow {
-  text-shadow: 0 0 24px rgba(232, 179, 76, 0.25);
-}
-
-@keyframes caret-blink {
-  0%,
-  49% {
-    opacity: 1;
+  .hover-lift:hover,
+  .animated-card:hover {
+    transform: none;
   }
-  50%,
-  100% {
-    opacity: 0;
-  }
-}
-.caret {
-  animation: caret-blink 1s step-end infinite;
-}
-
-@keyframes fade-up {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-.animate-fade-up {
-  animation: fade-up 0.6s ease-out both;
 }
